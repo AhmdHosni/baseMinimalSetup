@@ -42,15 +42,15 @@ copy_file "$ANDROID_STUDIO_SHORTCUT_SOURCE_DIR/android-studio.desktop" "$ANDROID
 # create and set custom icon of .android folder:
 ###############################################
 # set_folder_icon "TargetFolder" "PathToCustomIcon.png" "Description"
-FOLDER_ICON_SOURCE_FILE="$THIS_DIR/configs/icons/pngs/android.png"
-LOCAL_ICON_FOLDER="$HOME/.local/share/icons/pngs" && mkdir -p $LOCAL_ICON_FOLDER
+# FOLDER_ICON_SOURCE_FILE="$THIS_DIR/configs/icons/pngs/android.png"
+# LOCAL_ICON_FOLDER="$HOME/.local/share/icons/pngs" && mkdir -p $LOCAL_ICON_FOLDER
 #copy_file "$FOLDER_ICON_SOURCE_FILE" "$LOCAL_ICON_FOLDER"
 
 # setting the folder icon to ~/.android and ~/.java
-_ANDROID_TARGET_FOLDER="$HOME/.android" && mkdir -p $_ANDROID_TARGET_FOLDER
-_JAVA_TARGET_FOLDER="$HOME/.java" && mkdir -p $_JAVA_TARGET_FOLDER
-set_folder_icon "$_ANDROID_TARGET_FOLDER" "$LOCAL_ICON_FOLDER/android.png" "setting custom icon to ~/.android folder"
-set_folder_icon "$_JAVA_TARGET_FOLDER" "$LOCAL_ICON_FOLDER/java.png" "setting custom icon to ~/.java folder"
+# _ANDROID_TARGET_FOLDER="$HOME/.android" && mkdir -p $_ANDROID_TARGET_FOLDER
+# _JAVA_TARGET_FOLDER="$HOME/.java" && mkdir -p $_JAVA_TARGET_FOLDER
+# set_folder_icon "$_ANDROID_TARGET_FOLDER" "$LOCAL_ICON_FOLDER/android.png" "setting custom icon to ~/.android folder"
+# set_folder_icon "$_JAVA_TARGET_FOLDER" "$LOCAL_ICON_FOLDER/java.png" "setting custom icon to ~/.java folder"
 
 #####################
 # Main Install
