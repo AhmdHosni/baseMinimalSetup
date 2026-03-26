@@ -16,6 +16,15 @@ sudo pacman -S --needed --noconfirm kitty
 ## Notifications
 sudo pacman -S --needed --noconfirm swaync
 
+## Top Toolbar for hyprland
+sudo pacman -S --needed --noconfirm waybar
+
+## A window switcher, application launcher, run dialog, ssh-launcher and dmenu replacement
+sudo pacman -S --needed --noconfirm rofi
+
+## A tool for animated wallpapers (transition). An Answer to your Wayland Wallpaper Woes
+sudo pacman -S --needed --noconfirm swww
+
 ## Grab images from a Wayland compositor. Works great with slurp  for Screen shots
 sudo pacman -S --needed --noconfirm grim
 
@@ -49,9 +58,6 @@ sudo pacman -S --needed --noconfirm wget
 ## Tools allowing to manipulate the Wireless Extensions
 sudo pacman -S --needed --noconfirm wireless_tools
 
-## A window switcher, application launcher, run dialog, ssh-launcher and dmenu replacement
-sudo pacman -S --needed --noconfirm rofi
-
 ## xdg-desktop-portal backend for hyprland
 # This handles screen sharing (OBS, Discord), file pickers, and opening links between apps.
 sudo pacman -S --needed --noconfirm xdg-desktop-portal-hyprland
@@ -66,5 +72,8 @@ sudo pacman -S --needed --noconfirm xdg-utils
 ## Wayland version of xclip for copy and paste
 sudo pacman -S --needed --noconfirm wl-clipboard
 
-## A tool for animated wallpapers (transition). An Answer to your Wayland Wallpaper Woes
-sudo pacman -S --needed --noconfirm swww
+## Theme and Icon Manager
+sudo pacman -S --needed --noconfirm nwg-look
+
+## Applicaiton Dark theme
+sudo pacman -S --needed --noconfirm adw-gtk-theme
