@@ -1,5 +1,5 @@
 * {
-    font-family: FontAwesome, "Noto Sans", Roboto, Helvetica, Arial, sans-serif;
+    font-family: FontAwesome, "Noto Sans", "RobotoMono Nerd Font", Helvetica, Arial, sans-serif;
     font-size: 19px;
 }
 

@@ -1,0 +1,75 @@
+./install-theme.sh
+sudo mount /dev/nvme1n1p4 /mnt
+rm -vfr gnome49_onArch_with_jdk_fromScript_2026-02-17-18-img
+rm -vfr arch_lts_gnome_from_script_created_7_February_2026_10-00-pm_2026-02-07-20-img
+rm -vfr debian_13_gnome_has_it_all_correct_uuid_updated_2_February_2026_1-18-pm_2026-02-02-021-img debian_13_base_with_zsh_global_zenv_no_storage_after_crash_30_January_2026_10-51-am_2026-01-30-08-img debian_13_with_zsh_zenv_2026-01-20-09-img gnome49_onArch_zen_FromScript_USE_THIS_ONE_created_at_17_February_2026_10-06-am_2026-02-17-08-img gnome_all_on_debian13_from_script_created_10_february_2026_12-20-pm_2026-02-10-10-img gnome_on_debian13_no_recommends_2026-02-09-04-img debian_13_gnome_with_zsh_zinit_global_zenv_nvim_with_plugins_2026-01-28-12-img 
+lah
+cd /mnt
+rm -vfr gnome49_onArchZen_zero_from_Script_created_27_February_2026_09-18-am_2026-02-27-07-img
+lsblk
+cd /boot/grub/themes
+sudo rm -vfr starfield
+sudo cp aliases.zsh.new /usr/share/zsh/zshExtras/aliases/aliases.zsh
+which vsCode
+which code
+which nvim
+clean
+rm -vfr ~/.cache/*
+sudo su -
+sudo cp zshenv /etc/zsh/zshenv
+sudo cp aliases.zsh /usr/share/zsh/zshExtras/aliases/aliases.zsh
+./make-it-accessable.sh
+sudo pacman -S hyprland waybar swaync swww rofi
+cd /media/ahmdhosni/Storage/Pictures/
+cd /media/ahmdhosni/Storage/Pictures/wallpapers
+git clone https://github.com/mylinuxforwork/wallpaper.git
+fp
+cd ~/.config/hypr
+nvim hyprland.conf
+sudo pacman -S --needed ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick
+cd ~/.config/tmux
+tmux kill-server && tmux || tmux
+cp /media/ahmdhosni/Storage/Settings/gitRepos/distroSetup/scripts/configs/tmux/tmux.conf ~/.config/tmux/tmux.conf.bak
+~/.config/tmux
+nvim tmux.conf
+mv tmux.conf tmux.conf.old
+cp tmux.conf.bak tmux.conf
+nvim keymap.toml
+nvim
+nvim yazi.toml
+tmux
+cd ~/.config/yazi
+mkdir flavors
+mv flavers themes
+mv -r flavers themes
+mv -f flavors themes
+cd themes
+mv -f themes flavors
+ya pkg add BennyOe/tokyo-night
+cd flavors
+cd ..
+ls
+nvim theme-dark.toml
+y
+cp -r yazi ~/.config/
+nvim ~/.config/yazi/yazi.toml
+nvim .zshrc
+yazi --clear-cache
+start-hyprland
+yi
+cd ~/.config/zsh
+nvim ~/.config/yazi/keymap.toml
+nvim ~/.config/hypr/hyprland.conf
+exit
+nvim ~/.config/zsh/.zshrc
+chooseOnQuit
+yq
+yy
+q
+yy
+nvim ~/.config/yazi/yazi.toml
+nvim ~/.config/zsh/.zshrc
+nvim ~/.config/yazi/keymap.toml
+yx
+yq
+yy
