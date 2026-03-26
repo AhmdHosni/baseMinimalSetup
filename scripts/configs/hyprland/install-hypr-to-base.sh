@@ -7,6 +7,10 @@
 # Description:
 #--------------------------------------------------------------------------------
 
+#######################
+#### Initial Installs :
+#######################
+
 ## Hyperland window manager
 sudo pacman -S --needed --noconfirm hyprland
 
@@ -77,3 +81,15 @@ sudo pacman -S --needed --noconfirm nwg-look
 
 ## Applicaiton Dark theme
 sudo pacman -S --needed --noconfirm adw-gtk-theme
+
+############################
+### Copying Config folders :
+############################
+
+# Get the directory where this script is located
+THIS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+TARGET_CONFIG_DIR="$HOME/.config"
+
+cp -vfr $THIS_DIR/waybar $TARGET_CONFIG_DIR
+cp -vfr $THIS_DIR/rofi $TARGET_CONFIG_DIR
+cp -vfr $THIS_DIR/hypr $TARGET_CONFIG_DIR
