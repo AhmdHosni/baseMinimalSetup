@@ -54,7 +54,7 @@ sudo pacman -S --needed --noconfirm slurp
 sudo pacman -S --needed --noconfirm smartmontools
 
 ## Universal Wayland Session Manager - uwsm  A standalone Wayland session manager
-sudo pacman -S --needed --noconfirm uwsm
+# sudo pacman -S --needed --noconfirm uwsm
 
 ## A free software package for retrieving files using HTTP, HTTPS, FTP and FTPS
 sudo pacman -S --needed --noconfirm wget
@@ -82,6 +82,8 @@ sudo pacman -S --needed --noconfirm nwg-look
 ## Applicaiton Dark theme
 sudo pacman -S --needed --noconfirm adw-gtk-theme
 
+## imagemagic (for pywal and works well with kitty)
+sudo pacman -S --needed --noconfirm imagemagick
 ############################
 ### Copying Config folders :
 ############################
