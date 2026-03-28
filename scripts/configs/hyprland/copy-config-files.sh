@@ -7,7 +7,7 @@
 # Description:
 #--------------------------------------------------------------------------------
 
-start-hyprland
+# start-hyprland
 
 ############################
 ### Copying Config folders :
@@ -35,6 +35,6 @@ find $TARGET_CONFIG_DIR/rofi -type f -name "*.sh" -exec chmod +x {} +
 ###############################
 ### run cycle-wallpaper once  :
 ###############################
-exec awww-daemon &
+awww-daemon &
 ~/.config/hypr/cycle-wallpapers.sh
 exit 0
