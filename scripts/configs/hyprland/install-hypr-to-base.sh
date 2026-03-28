@@ -92,6 +92,7 @@ sudo pacman -S --needed --noconfirm imagemagick
 THIS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 TARGET_CONFIG_DIR="$HOME/.config"
 
-cp -vfr $THIS_DIR/waybar $TARGET_CONFIG_DIR
-cp -vfr $THIS_DIR/rofi $TARGET_CONFIG_DIR
-cp -vfr $THIS_DIR/hypr $TARGET_CONFIG_DIR
+cp -vfr $THIS_DIR/configVersion2/waybar $TARGET_CONFIG_DIR
+cp -vfr $THIS_DIR/configVersion2/rofi $TARGET_CONFIG_DIR
+cp -vfr $THIS_DIR/configVersion2/hypr $TARGET_CONFIG_DIR
+cp -vfr $THIS_DIR/configVersion2/kitty $TARGET_CONFIG_DIR
