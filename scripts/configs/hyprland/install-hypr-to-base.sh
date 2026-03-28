@@ -84,15 +84,8 @@ sudo pacman -S --needed --noconfirm adw-gtk-theme
 
 ## imagemagic (for pywal and works well with kitty)
 sudo pacman -S --needed --noconfirm imagemagick
-############################
-### Copying Config folders :
-############################
 
-# Get the directory where this script is located
-THIS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-TARGET_CONFIG_DIR="$HOME/.config"
+## install firefox
+sudo pacman -S --needed --noconfirm firefox
 
-cp -vfr $THIS_DIR/configVersion2/waybar $TARGET_CONFIG_DIR
-cp -vfr $THIS_DIR/configVersion2/rofi $TARGET_CONFIG_DIR
-cp -vfr $THIS_DIR/configVersion2/hypr $TARGET_CONFIG_DIR
-cp -vfr $THIS_DIR/configVersion2/kitty $TARGET_CONFIG_DIR
+exit 0

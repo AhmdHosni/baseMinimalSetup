@@ -12,8 +12,10 @@ if command -v pacman &>/dev/null; then
     sudo pacman -S --needed base-devel
     mkdir -p ~/Downloads/paru && cd paru
     git clone https://aur.archlinux.org/paru.git
-    cd paru
     makepkg -si
+    cd -
 
     # paru --gendb
 fi
+
+exit 0

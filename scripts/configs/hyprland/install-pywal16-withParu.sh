@@ -27,4 +27,11 @@ else
 fi
 
 echo "Installation complete. Restart your terminal or source your config."
+
+################
+# Require Reboot
+################
+
+sudo touch /var/run/reboot-required
+
 exit 0
