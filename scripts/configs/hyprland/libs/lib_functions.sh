@@ -830,9 +830,72 @@ copy_folder() {
 # Git Clone
 #####################
 
-# Clones a git repository to a destination path.
-# Usage:  git_clone "https://github.com/user/repo.git" "/dest/path" "Description" [branch]
-# 4th arg: optional branch name
+# # Clones a git repository to a destination path.
+# # Usage:  git_clone "https://github.com/user/repo.git" "/dest/path" "Description" [branch]
+# # 4th arg: optional branch name
+# git_clone() {
+#     local repo_url="$1"
+#     local dest_path="$2"
+#     local description="$3"
+#     local branch="$4"
+#     local repo_name
+#     repo_name=$(basename "$repo_url" .git)
+#
+#     echo ""
+#     echo -e "${YELLOW}${BOLD}Cloning repository: ${repo_name}${NC}"
+#     [ -n "$description" ] && echo -e "${YELLOW}${BOLD}Description: ${description}${NC}"
+#     echo -e "${YELLOW}Repository:  ${repo_url}${NC}"
+#     echo -e "${YELLOW}Destination: ${dest_path}${NC}"
+#     [ -n "$branch" ] && echo -e "${YELLOW}Branch:      ${branch}${NC}"
+#
+#     # git must be available
+#     if ! command -v git &>/dev/null; then
+#         echo -e "${RED}✗ Git is not installed. Please install git first.${NC}"
+#         return 1
+#     fi
+#
+#     # Destination already exists
+#     if [ -d "$dest_path" ]; then
+#         if [ -d "$dest_path/.git" ]; then
+#             echo -e "${BLUE}⊙ Already cloned: ${dest_path}${NC}"
+#             return 0
+#         # else
+#         #     echo -e "${RED}✗ Destination exists but is not a git repository: ${dest_path}${NC}"
+#         #     echo -e "${YELLOW}Please remove or rename it manually.${NC}"
+#         #     return 1
+#         fi
+#     fi
+#
+#     # Create parent directory if needed
+#     local parent_dir
+#     parent_dir="$(dirname "$dest_path")"
+#     if [ ! -d "$parent_dir" ]; then
+#         echo -e "${CYAN}Creating parent directory...${NC}"
+#         mkdir -p "$parent_dir" 2>/dev/null || sudo mkdir -p "$parent_dir" 2>/dev/null || {
+#             echo -e "${RED}✗ Failed to create parent directory${NC}"
+#             return 1
+#         }
+#         echo -e "${GREEN}✓ Parent directory created${NC}"
+#     fi
+#
+#     # Clone
+#     echo -e "${CYAN}Cloning repository, please wait...${NC}"
+#     local clone_args="--progress"
+#     [ -n "$branch" ] && clone_args="--branch $branch --progress"
+#
+#     if git clone ${clone_args} "$repo_url" "$dest_path" 2>&1 | while IFS= read -r line; do
+#         if echo "$line" | grep -qE "Cloning|Receiving|Resolving|Checking"; then
+#             echo -e "${CYAN}  → ${line}${NC}"
+#         fi
+#     done; then
+#         echo -e "${GREEN}✓ Repository cloned successfully to ${dest_path}${NC}"
+#         return 0
+#     else
+#         echo -e "${RED}✗ Failed to clone repository${NC}"
+#         return 1
+#     fi
+# }
+
 git_clone() {
     local repo_url="$1"
     local dest_path="$2"
@@ -859,10 +922,16 @@ git_clone() {
         if [ -d "$dest_path/.git" ]; then
             echo -e "${BLUE}⊙ Already cloned: ${dest_path}${NC}"
             return 0
-        # else
-        #     echo -e "${RED}✗ Destination exists but is not a git repository: ${dest_path}${NC}"
-        #     echo -e "${YELLOW}Please remove or rename it manually.${NC}"
-        #     return 1
+        else
+            # Directory exists but is not a git repo - remove and reclone
+            echo -e "${YELLOW}⚠ Destination exists but is not a git repository${NC}"
+            echo -e "${CYAN}Removing invalid directory and re-cloning...${NC}"
+            rm -rf "$dest_path" 2>/dev/null || sudo rm -rf "$dest_path" 2>/dev/null || {
+                echo -e "${RED}✗ Failed to remove invalid directory: ${dest_path}${NC}"
+                echo -e "${YELLOW}Please remove it manually: sudo rm -rf ${dest_path}${NC}"
+                return 1
+            }
+            echo -e "${GREEN}✓ Invalid directory removed${NC}"
         fi
     fi
 
@@ -892,6 +961,100 @@ git_clone() {
         return 0
     else
         echo -e "${RED}✗ Failed to clone repository${NC}"
+        return 1
+    fi
+}
+
+#####################
+# Install from AUR with Tmux (Arch Linux)
+#####################
+
+# In your installation script:
+
+# # Simple version (no tmux)
+# install_from_aur "paru-bin" "AUR helper" "cleanup"
+#
+# # Tmux version (better for long builds)
+# TOTAL_PACKAGES=3
+# install_from_aur_tmux "paru-bin" "AUR helper" "cleanup"
+# install_from_aur_tmux "yay-bin" "Another AUR helper"
+# install_from_aur_tmux "visual-studio-code-bin" "VS Code"
+
+install_from_aur() {
+    local package_name="$1"
+    local description="$2"
+    local cleanup="${3:-keep}"
+    local build_dir="/tmp/${package_name}"
+    local aur_url="https://aur.archlinux.org/${package_name}.git"
+
+    CURRENT_PACKAGE=$((CURRENT_PACKAGE + 1))
+
+    echo ""
+    echo -e "${YELLOW}${BOLD}[${CURRENT_PACKAGE}/${TOTAL_PACKAGES}] Installing from AUR: ${package_name}${NC}"
+    [ -n "$description" ] && echo -e "${YELLOW}Description: ${description}${NC}"
+
+    # Check if already installed
+    if pacman -Q ${package_name} &>/dev/null; then
+        echo -e "${BLUE}⊙ Already installed: ${package_name}${NC}"
+        local version
+        version=$(pacman -Q ${package_name} 2>/dev/null | awk '{print $2}')
+        [ -n "$version" ] && echo -e "${CYAN}  → Version: ${version}${NC}"
+        return 0
+    fi
+
+    # Clone
+    echo -e "${CYAN}Cloning AUR repository...${NC}"
+
+    if [ -d "$build_dir" ] && [ ! -d "$build_dir/.git" ]; then
+        rm -rf "$build_dir" 2>/dev/null
+    fi
+
+    if [ ! -d "$build_dir" ]; then
+        if ! git clone "$aur_url" "$build_dir" &>/dev/null; then
+            echo -e "${RED}✗ Failed to clone AUR repository${NC}"
+            return 1
+        fi
+    fi
+    echo -e "${GREEN}✓ Repository cloned${NC}"
+
+    # Build with tmux
+    echo -e "${CYAN}Building package, please wait (right pane)...${NC}"
+    echo -e "${CYAN}This may take several minutes...${NC}"
+
+    >"$STATUS_FILE"
+
+    local build_cmd="cd ${build_dir} && makepkg -si --noconfirm; RC=\$?; if [ \$RC -ne 0 ]; then sudo makepkg -si --noconfirm; RC=\$?; fi; echo \$RC"
+
+    tmux split-window -h \
+        "bash -c '${build_cmd} > ${STATUS_FILE}; sleep 2; exit'"
+
+    # Wait for completion
+    while [ ! -s "$STATUS_FILE" ]; do
+        sleep 1
+    done
+
+    local exit_code
+    exit_code=$(cat "$STATUS_FILE")
+
+    tmux select-pane -t 0 2>/dev/null || true
+
+    if [ "$exit_code" -eq 0 ]; then
+        echo -e "${GREEN}✓ Successfully installed: ${package_name}${NC}"
+
+        local version
+        version=$(pacman -Q ${package_name} 2>/dev/null | awk '{print $2}')
+        [ -n "$version" ] && echo -e "${CYAN}  → Version: ${version}${NC}"
+
+        if [ "$cleanup" = "cleanup" ]; then
+            rm -rf "$build_dir" 2>/dev/null
+            echo -e "${CYAN}✓ Build directory cleaned up${NC}"
+        fi
+
+        sleep 1
+        return 0
+    else
+        echo -e "${RED}✗ Failed to install: ${package_name}${NC}"
+        sleep 1
         return 1
     fi
 }

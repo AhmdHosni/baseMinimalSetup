@@ -13,6 +13,6 @@ source "$THIS_DIR/libs/lib_functions.sh"
 start_tmux
 cache_sudo
 
-git_clone "https://aur.archlinux.org/paru.git" "~/Downloads/paru"
+install_from_aur "paru" "install Paru Aur Helper" "cleanup"
 
 exit 0
