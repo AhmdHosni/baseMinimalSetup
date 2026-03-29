@@ -17,7 +17,8 @@ cache_sudo
 if [ -f /etc/arch-release ]; then
     echo "Arch Linux detected. Installing with paru..."
     install_package "imagemagick" "imagemagick is required for pywal16 to work"
-    paru -S python-pywal16
+    # paru -S python-pywal16
+    install_from_aur "python-pywal16" "Installing pywal from AUR" "cleanup"
 elif [ -f /etc/debian_version ]; then
     echo "Debian detected. Installing via pip (using venv)..."
     sudo apt update && sudo apt install -y python3-pip python3-venv imagemagick

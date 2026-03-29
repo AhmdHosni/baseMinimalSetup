@@ -40,6 +40,6 @@ find $TARGET_CONFIG_DIR/rofi -type f -name "*.sh" -exec chmod +x {} +
 ### run cycle-wallpaper once  :
 ###############################
 # awww-daemon &
-wal -i $DATAROOTDIR/hypr/wall0
+wal -i $DATAROOTDIR/hypr/wall0.png
 
 exit 0
